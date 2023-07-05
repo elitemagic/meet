@@ -5,58 +5,106 @@ A serverless, Progressive Web Application (PWA) built with React (using a test-d
 The project dependencies include JavaScript and AWS, with the key technologies including React.
 
 
-	Feature 1: Filter Events by City
-User story:
-As a user I should be able to filter events by city So that I can see the list of events that take place in that city
+**Feature 1: Filter Events by City**
 
-Scenarios
+As a user,
+I should be able to filter events by city
+So that I can see a list of events taking place in that city.
 
-Scenario 1: When user hasn't searched for a city, show upcoming events from all cities. Given user hasn’t searched for any city When the user opens the app Then the user should see a list of all upcoming events
+	SCENARIO 1: When user hasn’t searched for a specific city, show upcoming events from all cities.
+	Given user hasn’t searched for any city;
+	When the user opens the app;
+	Then the user should see a list of upcoming events.
+ 
+	SCENARIO 2: User should see a list of suggestions when they search for a city.
+	Given the main page is open;
+	When user starts typing in the city textbox;
+	Then the user should receive a list of cities (suggestions) that match what they’ve typed.
 
-Scenario 2: User should see a list of suggestions when they search for a city. Given the main page is open When user starts typing in the city textbox Then the user should see a list of cities (suggestions) that match what they’ve typed
+ 	SCENARIO 3: User can select a city from the suggested list.
+	Given user was typing “Berlin” in the city textbox AND the list of suggested cities is showing;
+	When the user selects a city (e.g., “Berlin, Germany”) from the list;
+	Then their city should be changed to that city (i.e., “Berlin, Germany”) AND the user should receive a list of upcoming events in that city.
 
-Scenario 3: User can select a city from the suggested list. Given the user was typing “Berlin” in the city textbox And the list of suggested cities is showing When the user selects a city (e.g., “Berlin, Germany”) from the list Then their city should be changed to that city (i.e., “Berlin, Germany”) And the list of suggestions should disappear And the user should receive a list of upcoming events in that city
 
-	Feature 2: Show/Hide an Event's Details
-User story
+**Feature 2: Show/Hide an Event's Details**
 
-As a user I should be able to show and hide event details So that I can get more information specifically about events of interest.
+As a user,
+I would like to be able to show/hide event details
+so that I can see more/less information about an event.
 
-Scenarios
+	Scenario 1: An event element is collapsed by default.
+	Given the user has a list of events;
+ 	When the events first appear;
+  	Then the event are displayed by title only.
+ 	
+ 
+	Scenario 2: User can expand an event to see details.
+ 	Given the user a list of events;
+  	When the user selects an event;
+   	Then the expanded details of the event are displayed.
+ 
+	Scenario 3: User can collapse an event to hide details.
+ 	Given the user is content with the viewing the details of an event;
+  	When the user selects to close the details;
+   	Then the details of the event will no longer be displayed.
+    
 
-Scenario 1: An event element is collapsed by default Given the user has just selected the city for which they wanted to browse events When the user receives the list of events in that city Then all event elements should be collapsed by default
 
-Scenario 2: User can expand an event to see its details Given the user has identified an event of interest When the user clicks on that event element Then the element should expand And display its details
+**Feature 3: Specify Number of Events**
 
-Scenario 3: User can collapse an event to hide its details Given the user has obtained all information they need about the event When the user clicks on that event element Then the element should collapse And hide its details again
+As a user,
+I would like to be able to specify the number of events I want to view in the app
+so that I can see more or fewer events in the events list at once.
 
-	Feature 3: Specify Number of Events
-User story
+	Scenario 1: When user hasn’t specified a number, 32 events are shown by default.
+ 	Given the user has not specified a number of events to view;
+  	When events are listed to the user;
+   	Then 32 events will be shown.
+ 
+	Scenario 2: User can change the number of events displayed.
+ 	Given the user wishes to choose the amount of events that are displayed;
+  	When the user selects their desired amount of events to be listed;
+   	Then this amount will be displayed.
 
-As a user I should be able to specify the number of displayed events So that I have control about how many events I want to see.
 
-Scenarios
+**Feature 4: Use the App When Offline**
 
-Scenario 1: When user hasn’t specified a number, 32 is the default number Given the user has not specified the number of events they want to see per city When the user receives the list of events in that city Then a number of 32 events should be displayed by default
+As a user,
+I would like to be able to use the app when offline
+so that I can see the events I viewed the last time I was online.
 
-Scenario 2: User can change the number of events they want to see Given the user received a list of 32 events per selected city When the user wants to see more or less events per city Then they should be able to modify the event number
+	Scenario 1: Show cached data when there’s no internet connection.
+ 	Given the user is no longer online;
+  	When the user wants to view events previously viewed;
+ 	Then display these events from cached data.
+  
+	Scenario 2: Show error when user changes search settings (city, number of events).
+ 	Given the user is off-line;
+  	When the user attempts to amend their search settings;
+	Then display an error message informing user they cannot amend settings when off-line.
+ 
+ 
+**Feature 5: Add an App Shortcut to the Home Screen**
 
-	Feature 4: Use the App When Offline
-User story
+As a user,
+I would like to be able to add the app shortcut to my home screen
+so that I can open the app faster.
 
-As a user I should be able to use the app when offline So that I can access event information even when there is not internet available.
+	Scenario 1: User can install the meet app as a shortcut on their device home screen.
+	Given the user wants the app to open faster;
+ 	When the user selects the option install the app;
+  	Then add a shortcut to their home screen.
+ 
+**Feature 6: Display Charts Visualizing Event Details**
 
-Scenarios
+As a user,
+I would like to be able to see a chart showing the upcoming events in each city
+so that I know what events are organized in which city.
 
-Scenario 1: Show cached data when there’s no internet connection Given the user lost internet connection When the user accesses the app Then chached data should still be available And an error message should appear
+	Scenario 1: Show a chart with the number of upcoming events in each city
+	Given the user wants a visual representation of the data;
+ 	When the user chooses a city;
+  	Then display the information in chart form
 
-	Feature 5: Data visualization
-User story
-
-As a user I should be able to view a chart which displays the number of upcoming events in each city So that I can quickly identify and compare the number of events of different cities.
-
-Scenarios
-
-Scenario 1: Show a chart with the number of upcoming events in each city Given the user has not selected a city When the user wants to compare events between cities Then they should be able to access a chart with the number of upcoming events in each city
-
-	Feature 6: Display Charts Visualizing Event Details
+	
